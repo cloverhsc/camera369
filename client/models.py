@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from authtools.models import AbstractEmailUser
+from django.core import validators
 
 # handle error
 from django.core.exceptions import ObjectDoesNotExist
@@ -54,6 +55,18 @@ class User(AbstractEmailUser):
     sex = models.CharField(_('sex'), max_length=1, null=True, blank=True)
     register_date = models.DateField(auto_now_add=True)
     modify_date = models.DateField(auto_now=True)
+    username = models.CharField(
+        _('username'),
+        max_length=30,
+        unique=False,
+        blank=True,
+        validators=[
+            validators.RegexValidator(r'^[\w.@+-]+$',
+                _('Enter a valid username. '
+                'This value may contain only letters, numbers '
+                'and @/./+/-/_ characters.'), 'invalid'),
+        ],
+    )
 
     friends = models.ManyToManyField(
         "self", through='CameraFriend', symmetrical=False

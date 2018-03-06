@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Test</title>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap.min.css"%}" />
-        <link rel="stylesheet" type="text/css" media="all" href="{% static "css/index.css"%}" />
-        <script data-main="{% static "js/app-index"%}" src="{% static "js/lib/require.js"%}"></script>
-    </head>
-    <body>
-        <h1 class="alert alert-primary">Test</h1>
-    </body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <h1 class="display-4">Hello, {{user.username}}</h1>
+    {% else %}
+    <a class="lead" href="{% url 'login' %}">Login</a>
+    {% endif %}
+{% endblock content %}

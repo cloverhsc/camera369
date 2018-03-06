@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Test</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" media="all" href="{% static " css/bootstrap.min.css "%}" />
+    <link rel="stylesheet" type="text/css" media="all" href="{% static " css/index.css "%}" />
+    <script data-main="{% static " js/app-login "%}" src="{% static " js/lib/require.js "%}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        <br>
+        <p>
+            <strong>-- OR --</strong>
+        </p>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+    </div>
+</body>
+
+</html>

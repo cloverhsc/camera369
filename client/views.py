@@ -15,3 +15,6 @@ class MyView(View):
 #     def get(self, request):
 
 #     return render(request, 'index.html')
+
+def UserLogin(request):
+    return render(request, 'login.html', locals())

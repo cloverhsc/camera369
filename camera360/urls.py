@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from client.views import MyView
+from client.views import MyView, UserLogin
 from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('authtools.urls')),
     url(r'^about/$', MyView.as_view()),
+    url(r'^login/', UserLogin, name="login"),
     url(r'^$', TemplateView.as_view(template_name="index.html")),
+
+    url(r'^auth/', include('social_django.urls', namespace='social')),
 ]
